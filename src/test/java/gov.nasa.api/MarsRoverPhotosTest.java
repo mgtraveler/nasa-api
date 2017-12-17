@@ -82,16 +82,10 @@ public class MarsRoverPhotosTest {
             copyPhotosByCameras.remove(currentKey);
             copyPhotosByCameras.forEach((nextKey, nextValue) -> {
                 if ((allowedRange * (currentValue != 0 ? currentValue : 1)) <= nextValue) {
-                    List<String> nTimesMoreImagesThanTheseCameras = errorCameras.containsKey(nextKey) ?
-                            errorCameras.get(nextKey) : new ArrayList<>();
-                    nTimesMoreImagesThanTheseCameras.add(currentKey);
-                    errorCameras.put(nextKey, nTimesMoreImagesThanTheseCameras);
+                    updateMapValues(errorCameras, nextKey, currentKey);
                 }
                 if (allowedRange * (nextValue != 0 ? nextValue : 1) <= currentValue) {
-                    List<String> nTimesMoreImagesThanTheseCameras = errorCameras.containsKey(currentKey) ?
-                            errorCameras.get(currentKey) : new ArrayList<>();
-                    nTimesMoreImagesThanTheseCameras.add(nextKey);
-                    errorCameras.put(currentKey, nTimesMoreImagesThanTheseCameras);
+                    updateMapValues(errorCameras, currentKey, nextKey);
                 }
             });
         });
@@ -99,5 +93,11 @@ public class MarsRoverPhotosTest {
         //then
         assertThat(errorCameras).as("Cameras have %d times more images than a list of cameras in []", allowedRange).
                 isEmpty();
+    }
+
+    private void updateMapValues(final Map<String, List<String>> map, final String key, final String newValue) {
+        List<String> values = map.containsKey(key) ? map.get(key) : new ArrayList<>();
+        values.add(newValue);
+        map.put(key, values);
     }
 }
