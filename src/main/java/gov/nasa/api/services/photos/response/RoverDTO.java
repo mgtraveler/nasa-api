@@ -1,4 +1,4 @@
-package gov.nasa.api.services.photos.entities;
+package gov.nasa.api.services.photos.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Rover {
+public class RoverDTO {
     private long id;
     private String name;
     @JsonProperty("landing_date")
@@ -20,5 +20,5 @@ public class Rover {
     private String maxDate;
     @JsonProperty("total_photos")
     private int totalPhotos;
-    private List<Camera> cameras;
+    private List<CameraDTO> cameras;
 }

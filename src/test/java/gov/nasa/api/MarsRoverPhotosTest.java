@@ -2,8 +2,8 @@ package gov.nasa.api;
 
 import gov.nasa.api.enums.Rover;
 import gov.nasa.api.services.photos.MarsPhotosParams;
-import gov.nasa.api.services.photos.entities.MarsPhotos;
-import gov.nasa.api.services.photos.entities.Photo;
+import gov.nasa.api.services.photos.response.MarsPhotosDTO;
+import gov.nasa.api.services.photos.response.PhotoDTO;
 import gov.nasa.api.steps.MarsRoverPhotosSteps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -36,16 +36,16 @@ public class MarsRoverPhotosTest {
         MarsPhotosParams paramsByEarthDate = new MarsPhotosParams().withEarthDate(earthDate);
 
         // when
-        MarsPhotos marsPhotosBySol = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, paramsBySol);
-        MarsPhotos marsPhotosByEarthDate = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, paramsByEarthDate);
-        Map<Long, Photo> comparedPhotosBySol = marsPhotosBySol.getPhotos()
+        MarsPhotosDTO marsPhotosBySol = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, paramsBySol);
+        MarsPhotosDTO marsPhotosByEarthDate = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, paramsByEarthDate);
+        Map<Long, PhotoDTO> comparedPhotosBySol = marsPhotosBySol.getPhotos()
                 .stream()
                 .limit(photosQty)
-                .collect(Collectors.toMap(Photo::getId, photo -> photo));
-        Map<Long, Photo> photosByEarthDateSameAsPhotosBySol = marsPhotosByEarthDate.getPhotos()
+                .collect(Collectors.toMap(PhotoDTO::getId, photoDTO -> photoDTO));
+        Map<Long, PhotoDTO> photosByEarthDateSameAsPhotosBySol = marsPhotosByEarthDate.getPhotos()
                 .stream()
-                .filter(photo -> comparedPhotosBySol.get(photo.getId()) != null)
-                .collect(Collectors.toMap(Photo::getId, photo -> photo));
+                .filter(photoDTO -> comparedPhotosBySol.get(photoDTO.getId()) != null)
+                .collect(Collectors.toMap(PhotoDTO::getId, photoDTO -> photoDTO));
 
         //then
         assertThat(photosByEarthDateSameAsPhotosBySol.keySet()).
@@ -70,7 +70,7 @@ public class MarsRoverPhotosTest {
             MarsPhotosParams photoParams = new MarsPhotosParams()
                     .withSol(sol)
                     .withCamera(camera);
-            MarsPhotos marsPhotos = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, photoParams);
+            MarsPhotosDTO marsPhotos = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, photoParams);
             photosByCameras.put(camera, marsPhotos.getPhotos().size());
         });
         LOGGER.info("Photos by 'Curiosity' cameras: {}", photosByCameras);
