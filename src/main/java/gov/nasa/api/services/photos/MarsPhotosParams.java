@@ -14,7 +14,7 @@ public class MarsPhotosParams {
         return sol;
     }
 
-    public MarsPhotosParams withSol(long sol) {
+    public MarsPhotosParams withSol(final long sol) {
         this.sol = Long.valueOf(sol);
         return this;
     }
@@ -23,7 +23,7 @@ public class MarsPhotosParams {
         return earthDate;
     }
 
-    public MarsPhotosParams withEarthDate(String earthDate) {
+    public MarsPhotosParams withEarthDate(final String earthDate) {
         this.earthDate = earthDate;
         return this;
     }
@@ -32,7 +32,7 @@ public class MarsPhotosParams {
         return camera;
     }
 
-    public MarsPhotosParams withCamera(String camera) {
+    public MarsPhotosParams withCamera(final String camera) {
         this.camera = camera;
         return this;
     }
@@ -41,7 +41,7 @@ public class MarsPhotosParams {
         return apiKey != null ? apiKey : CONFIG.apiKey();
     }
 
-    public MarsPhotosParams withApiKey(String apiKey) {
+    public MarsPhotosParams withApiKey(final String apiKey) {
         this.apiKey = apiKey;
         return this;
     }
@@ -50,7 +50,7 @@ public class MarsPhotosParams {
         return page;
     }
 
-    public MarsPhotosParams withPage(int page) {
+    public MarsPhotosParams withPage(final int page) {
         this.page = Integer.valueOf(page);
         return this;
     }
