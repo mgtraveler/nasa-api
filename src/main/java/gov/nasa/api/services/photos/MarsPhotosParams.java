@@ -1,7 +1,10 @@
 package gov.nasa.api.services.photos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import static gov.nasa.api.core.props.Props.CONFIG;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MarsPhotosParams {
 
     private Long sol;
@@ -14,44 +17,39 @@ public class MarsPhotosParams {
         return sol;
     }
 
-    public MarsPhotosParams withSol(final long sol) {
+    public void setSol(final long sol) {
         this.sol = Long.valueOf(sol);
-        return this;
     }
 
     public String getEarthDate() {
         return earthDate;
     }
 
-    public MarsPhotosParams withEarthDate(final String earthDate) {
+    public void setEarthDate(final String earthDate) {
         this.earthDate = earthDate;
-        return this;
     }
 
     public String getCamera() {
         return camera;
     }
 
-    public MarsPhotosParams withCamera(final String camera) {
+    public void setCamera(final String camera) {
         this.camera = camera;
-        return this;
     }
 
     public String getApiKey() {
         return apiKey != null ? apiKey : CONFIG.apiKey();
     }
 
-    public MarsPhotosParams withApiKey(final String apiKey) {
+    public void setApiKey(final String apiKey) {
         this.apiKey = apiKey;
-        return this;
     }
 
     public Integer getPage() {
         return page;
     }
 
-    public MarsPhotosParams withPage(final int page) {
+    public void setPage(final int page) {
         this.page = Integer.valueOf(page);
-        return this;
     }
 }

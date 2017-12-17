@@ -1,0 +1,9 @@
+{
+  "photosQty": 10,
+  "paramsBySol": {
+    "sol": 1000
+  },
+  "paramsByEarthDate": {
+    "earthDate": "2015-05-30"
+  }
+}
