@@ -1,7 +1,6 @@
 package gov.nasa.api.core.testng;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import gov.nasa.api.core.exceptions.TestDataException;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -51,12 +50,8 @@ public class CustomTestNGListener implements ITestListener {
 
     private void logTestData(ITestResult testResult) {
         if (testResult.getParameters().length != 0) {
-            try {
-                JsonNode jsonNode = (JsonNode) testResult.getParameters()[0];
-                LOGGER.info("Test data:\n {}", jsonNode.toString());
-            } catch (ClassCastException e) {
-                throw new TestDataException("Json file couldn't be casted to JsonPath", e);
-            }
+            JsonNode jsonNode = (JsonNode) testResult.getParameters()[0];
+            LOGGER.info("Test data:\n {}", jsonNode.toString());
         }
     }
 }
