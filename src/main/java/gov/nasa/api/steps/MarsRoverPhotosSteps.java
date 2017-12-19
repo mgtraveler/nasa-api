@@ -13,7 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MarsRoverPhotosSteps {
 
-    public MarsPhotosDTO getMarsPhotos(final Rover rover, final MarsPhotosParams marsPhotosParams) {
+    private MarsRoverPhotosSteps() {
+    }
+
+    public static MarsPhotosDTO getMarsPhotos(final Rover rover, final MarsPhotosParams marsPhotosParams) {
         try {
             Response response = getMarsRoverPhotosClient()
                     .getPhotos(rover.toString().toLowerCase(), marsPhotosParams.getSol(), marsPhotosParams.getEarthDate(),

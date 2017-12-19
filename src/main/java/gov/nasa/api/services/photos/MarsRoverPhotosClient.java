@@ -10,7 +10,7 @@ public interface MarsRoverPhotosClient {
 
     @GET("/mars-photos/api/v1/rovers/{rover}/photos")
     Call<MarsPhotosDTO> getPhotos(@Path("rover") String rover,
-                                  @Query("sol") Long sol,
+                                  @Query("sol") Integer sol,
                                   @Query("earth_date") String earthDate,
                                   @Query("camera") String camera,
                                   @Query("api_key") String apiKey,

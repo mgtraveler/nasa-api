@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class PhotoDTO {
-    private long id;
-    private long sol;
+    private int id;
+    private int sol;
     @JsonProperty("camera")
     private RoverCameraDTO roverCamera;
     @JsonProperty("img_src")

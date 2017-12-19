@@ -7,7 +7,6 @@ import gov.nasa.api.enums.Rover;
 import gov.nasa.api.services.photos.MarsPhotosParams;
 import gov.nasa.api.services.photos.response.MarsPhotosDTO;
 import gov.nasa.api.services.photos.response.PhotoDTO;
-import gov.nasa.api.steps.MarsRoverPhotosSteps;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -16,13 +15,12 @@ import java.util.stream.Collectors;
 import static gov.nasa.api.core.common.ErrorMsg.forNoMatch;
 import static gov.nasa.api.core.mapper.JsonMapper.readToObject;
 import static gov.nasa.api.core.logger.Logger.LOGGER;
+import static gov.nasa.api.steps.MarsRoverPhotosSteps.getMarsPhotos;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MarsRoverPhotosTest extends BaseTest{
 
     private static final Rover curiosityRover = Rover.CURIOSITY;
-
-    private MarsRoverPhotosSteps marsRoverPhotosSteps = new MarsRoverPhotosSteps();
 
     @Test(description = "Mars photos made by 'Curiosity' rover are equal based on sol and earth date",
             dataProvider = DATA_PROVIDER_METHOD)
@@ -34,13 +32,13 @@ public class MarsRoverPhotosTest extends BaseTest{
         MarsPhotosParams paramsByEarthDate =  readToObject(jsonNode.get("paramsByEarthDate"), MarsPhotosParams.class);
 
         // when
-        MarsPhotosDTO marsPhotosBySol = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, paramsBySol);
-        MarsPhotosDTO marsPhotosByEarthDate = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, paramsByEarthDate);
-        Map<Long, PhotoDTO> comparedPhotosBySol = marsPhotosBySol.getPhotos()
+        MarsPhotosDTO marsPhotosBySol = getMarsPhotos(curiosityRover, paramsBySol);
+        MarsPhotosDTO marsPhotosByEarthDate = getMarsPhotos(curiosityRover, paramsByEarthDate);
+        Map<Integer, PhotoDTO> comparedPhotosBySol = marsPhotosBySol.getPhotos()
                 .stream()
                 .limit(photosQty)
                 .collect(Collectors.toMap(PhotoDTO::getId, photoDTO -> photoDTO));
-        Map<Long, PhotoDTO> photosByEarthDateSameAsPhotosBySol = marsPhotosByEarthDate.getPhotos()
+        Map<Integer, PhotoDTO> photosByEarthDateSameAsPhotosBySol = marsPhotosByEarthDate.getPhotos()
                 .stream()
                 .filter(photoDTO -> comparedPhotosBySol.get(photoDTO.getId()) != null)
                 .collect(Collectors.toMap(PhotoDTO::getId, photoDTO -> photoDTO));
@@ -65,7 +63,7 @@ public class MarsRoverPhotosTest extends BaseTest{
         Map<String, Integer> photosByCameras = new HashMap<>();
         curiosityRover.getCameras().forEach(camera -> {
             paramsBySol.setCamera(camera);
-            MarsPhotosDTO marsPhotos = marsRoverPhotosSteps.getMarsPhotos(curiosityRover, paramsBySol);
+            MarsPhotosDTO marsPhotos = getMarsPhotos(curiosityRover, paramsBySol);
             photosByCameras.put(camera, marsPhotos.getPhotos().size());
         });
         LOGGER.info("Photos by 'Curiosity' cameras: {}", photosByCameras);

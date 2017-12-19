@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class RoverDTO {
-    private long id;
+    private int id;
     private String name;
     @JsonProperty("landing_date")
     private String landingDate;
@@ -15,7 +15,7 @@ public class RoverDTO {
     private String launchDate;
     private String status;
     @JsonProperty("max_sol")
-    private long maxSol;
+    private int maxSol;
     @JsonProperty("max_date")
     private String maxDate;
     @JsonProperty("total_photos")

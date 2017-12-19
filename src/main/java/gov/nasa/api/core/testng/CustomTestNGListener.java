@@ -19,26 +19,18 @@ public class CustomTestNGListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        LOGGER.info("Test Success: {}::{}", result.getMethod().getTestClass().getName(),
-                result.getMethod().getMethodName());
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        LOGGER.info("Test Failure: {}::{}", result.getMethod().getTestClass().getName(),
-                result.getMethod().getMethodName());
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        LOGGER.info("Test Skipped: {}::{}", result.getMethod().getTestClass().getName(),
-                result.getMethod().getMethodName());
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        LOGGER.info("Test Failure With Success Percentage: {}::{}", result.getMethod().getTestClass().getName(),
-                result.getMethod().getMethodName());
     }
 
     @Override

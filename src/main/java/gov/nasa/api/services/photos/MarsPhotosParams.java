@@ -7,18 +7,18 @@ import static gov.nasa.api.core.props.Props.CONFIG;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MarsPhotosParams {
 
-    private Long sol;
+    private Integer sol;
     private String earthDate;
     private String camera;
     private String apiKey;
     private Integer page;
 
-    public Long getSol() {
+    public Integer getSol() {
         return sol;
     }
 
-    public void setSol(final long sol) {
-        this.sol = Long.valueOf(sol);
+    public void setSol(final Integer sol) {
+        this.sol = sol;
     }
 
     public String getEarthDate() {
@@ -49,7 +49,7 @@ public class MarsPhotosParams {
         return page;
     }
 
-    public void setPage(final int page) {
-        this.page = Integer.valueOf(page);
+    public void setPage(final Integer page) {
+        this.page = page;
     }
 }

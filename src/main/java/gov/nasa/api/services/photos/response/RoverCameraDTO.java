@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class RoverCameraDTO {
-    private long id;
+    private int id;
     private String name;
     @JsonProperty("rover_id")
     private int roverId;
